@@ -1,30 +1,37 @@
-[org 0x7c00]
+;16 Jan 2023 6:02pm
+;Stack practice
+
 mov ah,0x0e
 
-mov al,"1"
-int 0x10
-mov al,the_secret
+mov bp,0x8000
+mov sp,bp
+
+push "G"
+push "W"
+push "6"
+
+
+mov al,[0x7ffe]
 int 0x10
 
-mov al,"2"
-int 0x10
-mov al,[the_secret]
+mov al,[0x8000]
 int 0x10
 
-mov al,"3"
-int 0x10
-mov bx,the_secret 
-add bx,0x7C00
-mov al,[bx]
+pop bx
+mov al,bl
 int 0x10
 
-mov al,"4"
-int 0x10
-mov al,[0x7c2b]
+pop bx
+mov al,bl
 int 0x10
 
-the_secret:
-    db "X"
+pop bx
+mov al,bl
+int 0x10
+
+
+mov al,[0x8000]
+int 0x10
 
 jmp $ ;infinite loop by jumping here 
 
