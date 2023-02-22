@@ -1,39 +1,31 @@
 ;16 Jan 2023 6:02pm
 ;Stack practice
 
-mov ah,0x0e
+;Doing os 05
 
-mov bp,0x8000
-mov sp,bp
+mov bx,First
+call print
 
-push "G"
-push "W"
-push "6"
+call print_nl
 
+mov bx,Second
+call print
 
-mov al,[0x7ffe]
-int 0x10
+call print_nl
 
-mov al,[0x8000]
-int 0x10
-
-pop bx
-mov al,bl
-int 0x10
-
-pop bx
-mov al,bl
-int 0x10
-
-pop bx
-mov al,bl
-int 0x10
-
-
-mov al,[0x8000]
-int 0x10
+mov dx, 0x12fe
+call print_hex
 
 jmp $ ;infinite loop by jumping here 
+
+%include "print.asm"
+%include "print_hex.asm"
+
+First:
+    db 'Why you!',0
+
+Second:
+    db 'Kono  dio!',0
 
 times 510 - ($-$$) db 0
 dw 0xaa55 
